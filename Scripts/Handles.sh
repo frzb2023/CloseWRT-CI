@@ -36,15 +36,15 @@ fi
 # fi
 
 #修改aurora菜单式样
-if [ -d *"luci-app-aurora-config"* ]; then
-	echo " "
+# if [ -d *"luci-app-aurora-config"* ]; then
+# 	echo " "
 
-	cd ./luci-app-aurora-config/
+# 	cd ./luci-app-aurora-config/
 
-	sed -i "s/nav_submenu_type '.*'/nav_submenu_type 'boxed-dropdown'/g" $(find ./root/ -type f -name "*aurora")
+# 	sed -i "s/nav_submenu_type '.*'/nav_submenu_type 'boxed-dropdown'/g" $(find ./root/ -type f -name "*aurora")
 
-	cd $PKG_PATH && echo "theme-aurora has been fixed!"
-fi
+# 	cd $PKG_PATH && echo "theme-aurora has been fixed!"
+# fi
 
 #修改qca-nss-drv启动顺序
 NSS_DRV="../feeds/nss_packages/qca-nss-drv/files/qca-nss-drv.init"
