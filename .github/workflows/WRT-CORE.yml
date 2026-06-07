@@ -160,7 +160,19 @@ jobs:
 
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+# === 下面是官方推荐的 Golang 1.26 换源步骤 ===
+      - name: Upgrade Golang Version to 1.26 (Official Fix)
+        working-directory: ./wrt
+        run: |
+          rm -rf feeds/packages/lang/golang
+          git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
 
+# === 重新给新换进来的 go 扩展包建立软链接 ===
+      - name: Re-install Golang feed
+        working-directory: ./wrt
+        run: |
+          ./scripts/feeds install -a
+# === 换源步骤结束 ===
       - name: Custom Packages
         run: |
           cd ./wrt/package/
@@ -199,11 +211,11 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v5
         with:
-          go-version: '1.25.11' # 一步到位安装最新稳定版，确保 >= 1.25.0
+          go-version: '1.26.x' # 一步到位安装最新稳定版，确保 >= 1.25.0
 
       - name: Verify Go version
         run: go version
-# === 上面是新增的 Go 环境升级步骤 ===
+      # === 上面是新增的 Go 环境升级步骤 ===
       - name: Machine Information
         run: |
           cd ./wrt/
