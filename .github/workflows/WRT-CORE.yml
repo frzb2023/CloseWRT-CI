@@ -195,7 +195,15 @@ jobs:
           cd ./wrt/
 
           make -j$(nproc) || make -j1 V=s
+# === 下面是新增的 Go 环境升级步骤 ===
+      - name: Setup Go environment
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.11' # 一步到位安装最新稳定版，确保 >= 1.25.0
 
+      - name: Verify Go version
+        run: go version
+# === 上面是新增的 Go 环境升级步骤 ===
       - name: Machine Information
         run: |
           cd ./wrt/
